@@ -1,21 +1,16 @@
 function symHelper(listOne, listTwo) {
   let uniqueValues = [];
-  let lengthOfListOne = listOne.length;
-  let lenghtOfListTwo = listTwo.length;
   let thereIsThatWord = false;
   
   for (let i = 0; i < listOne.length; i++) {
 
     for (let j = 0; j < listTwo.length; j++) {
 
-      console.log(`${listOne[i]} == ${listTwo[j]}`);
-
       // if number is found on the other list, break
       if(listOne[i] == listTwo[j]) {
         thereIsThatWord = true;
         break;
       } 
-
     }
 
     // If that number isn't found, add to new list
@@ -24,17 +19,33 @@ function symHelper(listOne, listTwo) {
     }
 
     thereIsThatWord = false; 
-
   }
 
   return uniqueValues;
 }
 
 function sym(listOne, listTwo) {
-  xList = symHelper(listOne, listTwo);
-  yList = symHelper(listTwo, listOne);
 
-  
+  let xList = symHelper(listOne, listTwo);
+  let yList = symHelper(listTwo, listOne);
+
+  if(xList.length > yList.length) {
+
+    yList.map(num => {
+      xList.push(num);
+    });
+
+    xList.sort();
+    return xList;
+
+  } else {
+
+    xList.map(num => {
+      yList.push(num);
+    });
+    yList.sort();
+    return yList;
+  }
 }
 
 let results = sym([1, 2, 3], [5, 2, 1, 4]);
